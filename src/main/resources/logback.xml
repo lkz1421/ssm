@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration>
+	
+	<property name="LOG_HOME" value="logs/" />
+	<property name="PROJECT_NAME" value="ssm" />
+	
+	<!-- 控制台输出-->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<Encoding>UTF-8</Encoding>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{30} - %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	<appender name="DATELOG" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+		<Prudent>true</Prudent>  
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter"> 
+			<level>DEBUG</level> <!-- 接受大于等于此级别的(debug,info,warn,error级别依次增大) -->
+			<onMatch>ACCEPT</onMatch> 
+			<onMismatch>DENY</onMismatch> 
+		</filter>   
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+			<level>ERROR</level> <!-- ERROR级别的不接受 -->
+			<onMatch>DENY</onMatch> 
+		</filter>   
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+			<FileNamePattern>${LOG_HOME}/${PROJECT_NAME}.%d{yyyy-MM-dd}.log</FileNamePattern>  
+			<MaxHistory>90</MaxHistory>    
+		</rollingPolicy>  
+		<layout class="ch.qos.logback.classic.PatternLayout">  
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{30} - %msg%n</pattern>  
+		</layout>
+	</appender>
+	 
+	<appender name="DATELOG_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+		<Prudent>true</Prudent>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+			<level>ERROR</level> 
+			<onMatch>ACCEPT</onMatch> 
+			<onMismatch>DENY</onMismatch> 
+		</filter>               
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+			<FileNamePattern>${LOG_HOME}/${PROJECT_NAME}.%d{yyyy-MM-dd}.error.log</FileNamePattern>  
+			<MaxHistory>90</MaxHistory>    
+		</rollingPolicy>  
+		<layout class="ch.qos.logback.classic.PatternLayout">  
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{30} - %msg%n</pattern>  
+		</layout>  
+	</appender>
+    
+    <!-- <appender name="db-classic-oracle" class="ch.qos.logback.classic.db.DBAppender">  
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">  
+            <dataSource class="com.mchange.v2.c3p0.ComboPooledDataSource">                 
+                <driverClass>oracle.jdbc.driver.OracleDriver</driverClass>  
+                <url>jdbc:oracle:thin:@localhost:1521:ORCL</url>  
+                <user>scott</user>
+                <password>tiger</password>
+                <sqlDialect class="ch.qos.logback.core.db.dialect.OracleDialect" />   
+            </dataSource>  
+        </connectionSource>
+        <sqlDialect class="ch.qos.logback.core.db.dialect.OracleDialect" />  
+    </appender>  -->
+    
+    <!--appender name="db-classic-mysql" class="ch.qos.logback.classic.db.DBAppender">  
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">  
+            <dataSource class="com.alibaba.druid.pool.DruidDataSource">                 
+                <driverClass>com.mysql.jdbc.Driver</driverClass>  
+                <url>jdbc:mysql://127.0.0.1:3306/test</url>
+                <username>root</username>  
+                <password>root</password>
+                <sqlDialect class="ch.qos.logback.core.db.dialect.MySQLDialect" />   
+            </dataSource>  
+        </connectionSource>
+        <sqlDialect class="ch.qos.logback.core.db.dialect.MySQLDialect" />  
+    </appender-->
+      
+    <logger name="com.ssm" additivity="false" level="DEBUG">
+		<appender-ref ref="DATELOG"/>
+		<appender-ref ref="DATELOG_ERROR"/>
+		<appender-ref ref="STDOUT"/>
+        <!--appender-ref ref="db-classic-mysql" /-->  
+	</logger>
+</configuration>
