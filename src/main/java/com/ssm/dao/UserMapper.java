@@ -3,6 +3,7 @@ package com.ssm.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.ssm.bean.User;
@@ -19,10 +20,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
-    
+
     @Select("select id,username from user")
 	List<Map<String, Object>> findAll();
 
     @Select("select * from user where username=#{name}")
-	List<User> find(String name);
+	List<User> find(@Param("name")String name);
 }
