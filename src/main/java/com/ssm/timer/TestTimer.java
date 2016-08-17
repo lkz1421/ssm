@@ -38,13 +38,16 @@ public class TestTimer {
 	@Scheduled(cron="0/5 * * * * ?")
 	public void run() {
 		n++;
+		LOGGER.info("run ...");
 		// test transaction
 //		if(n==1) txService.tx();
+		
 		// test select
-		LOGGER.info("run ...");
 //		List<User> users = userMapper.find("lkz");
 //		LOGGER.info(JSON.toJSONString(users));
 //		LOGGER.info("count ... "+userMapper.selectCount(new User()));
-		if(n==1) txService.insertBatch(members, "com.ssm.dao.UserMapper.vinsert");
+		
+		//test insert batch
+//		if(n==3) txService.insertBatch(members, "com.ssm.dao.UserMapper.vinsert");
 	}
 }
