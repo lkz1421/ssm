@@ -1,6 +1,8 @@
 package com.ssm.timer;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -22,16 +24,27 @@ public class TestTimer {
 	@Resource
 	private TXService txService;
 	private int n=0;
+	private static List<User> members = new ArrayList<User>();
+	
+	static {
+		for(int i=0;i<5000;i++){
+			User u = new User();
+			u.setId(UUID.randomUUID().toString().replace("-", ""));
+			u.setUsername("lkz");
+			members.add(u);
+		}
+	}
 	
 	@Scheduled(cron="0/5 * * * * ?")
 	public void run() {
 		n++;
 		// test transaction
-		if(n==1) txService.tx();
+//		if(n==1) txService.tx();
 		// test select
 		LOGGER.info("run ...");
-		List<User> users = userMapper.find("lkz");
-		LOGGER.info(JSON.toJSONString(users));
-		LOGGER.info("count ... "+userMapper.selectCount(new User()));
+//		List<User> users = userMapper.find("lkz");
+//		LOGGER.info(JSON.toJSONString(users));
+//		LOGGER.info("count ... "+userMapper.selectCount(new User()));
+		if(n==1) txService.insertBatch(members, "com.ssm.dao.UserMapper.vinsert");
 	}
 }

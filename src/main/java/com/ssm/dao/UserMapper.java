@@ -11,6 +11,9 @@ import com.ssm.bean.User;
 import tk.mybatis.mapper.common.Mapper;
 
 public interface UserMapper extends Mapper<User>{
+	
+	int vinsert(List<User> list);
+	
     @Select("select id,username from user")
 	List<Map<String, Object>> findAll();
 

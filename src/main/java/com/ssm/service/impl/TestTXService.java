@@ -37,26 +37,29 @@ public class TestTXService implements TXService {
 		SqlSession session = null;
 		try {
 			session = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
-			int batchCount = 500; // 每批commit的个数
+			int batchCount = 200; // 每批commit的个数
 			int batchLastIndex = batchCount;// 每批最后一个的下标
-			for (int index = 0; index < members.size();) {
-				if (batchLastIndex >= members.size()) {
-					batchLastIndex = members.size();
+			int len = members.size();
+			for (int index = 0; index < len;) {
+				if (batchLastIndex >= len) {
+					batchLastIndex = len;
 					result = result * session.insert(sqlId , members.subList(index, batchLastIndex));
 					session.commit();
-					System.out.println("index:" + index + " batchLastIndex:" + batchLastIndex);
+					LOGGER.info("index:" + index + " batchLastIndex:" + batchLastIndex);
 					break;// 数据插入完毕，退出循环
 				} else {
 					result = result * session.insert(sqlId, members.subList(index, batchLastIndex));
 					session.commit();
-					System.out.println("index:" + index + " batchLastIndex:" + batchLastIndex);
+					LOGGER.info("index:" + index + " batchLastIndex:" + batchLastIndex);
 					index = batchLastIndex;// 设置下一批下标
-					batchLastIndex = index + (batchCount - 1);
+					batchLastIndex = index + batchCount;
 				}
 			}
 			session.commit();
+		}catch(Exception e){
+			LOGGER.error("insert batch fail ..." + e.getMessage(),e);
+			throw new RuntimeException("insert batch fail ..." + e.getMessage());
 		} finally {
-			session.rollback();
 			session.close();
 		}
 	}
