@@ -8,19 +8,9 @@ import org.apache.ibatis.annotations.Select;
 
 import com.ssm.bean.User;
 
-public interface UserMapper {
-    int deleteByPrimaryKey(String id);
+import tk.mybatis.mapper.common.Mapper;
 
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
-
+public interface UserMapper extends Mapper<User>{
     @Select("select id,username from user")
 	List<Map<String, Object>> findAll();
 

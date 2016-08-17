@@ -17,7 +17,7 @@
     id, username, password, nick, email, mobile, level, speakIntervalTime, forbidTalk, 
     createTime
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <!--select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
@@ -149,5 +149,5 @@
       forbidTalk = #{forbidtalk,jdbcType=VARCHAR},
       createTime = #{createtime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </update-->
 </mapper>
