@@ -150,7 +150,7 @@
       createTime = #{createtime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update-->
-  <insert id="vinsert" parameterType="java.util.List">
+  <insert id="insertBatch" parameterType="java.util.List">
     insert into user (id,username) values
     <foreach collection="list" item="u" separator=",">
     	(#{u.id},#{u.username})

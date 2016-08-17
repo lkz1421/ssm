@@ -48,6 +48,6 @@ public class TestTimer {
 //		LOGGER.info("count ... "+userMapper.selectCount(new User()));
 		
 		//test insert batch
-//		if(n==3) txService.insertBatch(members, "com.ssm.dao.UserMapper.vinsert");
+//		if(n==3) txService.insertBatch(members, "com.ssm.dao.UserMapper.insertBatch");
 	}
 }
