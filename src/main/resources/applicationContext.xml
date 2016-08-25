@@ -97,7 +97,7 @@
 	</tx:advice>
 	<!-- <aop:config/> 的定义，确保由txAdvice bean定义的事务通知在应用中具体点被执行 -->
 	<aop:config>
-		<!-- 在com.**.service包下面的所有对象拥有默认的事务语义 ，前面的*表示任意返回类型，倒数第二个表示任意类，第三个表示任意方法 -->
+		<!-- 在com.*.service包下面的所有对象拥有默认的事务语义 ，前面的*表示任意返回类型，倒数第二个表示任意类，第三个表示任意方法 -->
 		<aop:pointcut id="ServiceMethods"
 			expression="execution(* com.*.service.impl.*.*(..))" />
 		<!-- 用通知器advisor把txAdvice和执行事务语义的地方绑定在一起 -->
