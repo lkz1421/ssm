@@ -23,7 +23,7 @@ public class TestTimer {
 	private UserMapper userMapper;
 	@Resource
 	private TXService txService;
-	private int n=0;
+//	private int n=0;
 	private static List<User> members = new ArrayList<User>();
 	
 	static {
@@ -37,8 +37,8 @@ public class TestTimer {
 	
 	@Scheduled(cron="0/5 * * * * ?")
 	public void run() {
-		n++;
-		LOGGER.info("run ...");
+//		n++;
+//		LOGGER.info("run ...");
 		// test transaction
 //		if(n==1) txService.tx();
 		

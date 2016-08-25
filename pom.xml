@@ -8,11 +8,13 @@
 	
 	<!-- export jar :: dependency:copy-dependencies -->
 	<!-- mybatis generator :: mybatis-generator:generate -->
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javaee.version>7.0</javaee.version>
 		<servlet.version>2.5</servlet.version>
 		<spring.version>4.3.2.RELEASE</spring.version>
+		<shiro.version>1.4.0</shiro.version>
 		<cglib.version>3.2.4</cglib.version>
 		<aspectjrt.version>1.8.9</aspectjrt.version>
 		<quartz.version>2.2.3</quartz.version>
@@ -114,6 +116,27 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!-- shiro -->
+		<dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
 		<!-- quartz -->
 		<dependency>  
             <groupId>org.quartz-scheduler</groupId>  
@@ -204,9 +227,32 @@
 		    <version>${mapper.version}</version>
 		</dependency>
 	</dependencies>
+	
+	<repositories>
+        <repository>
+            <id>oss-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 	<build>
+		<finalName>ssm</finalName>
 		<plugins>
+			<plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- run >> maven bulid >> Goals >> mybatis-generator:generate -->
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
