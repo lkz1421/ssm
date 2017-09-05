@@ -1,41 +1,20 @@
 package com.ssm;
 
 import com.ssm.dto.Const;
+import lombok.Data;
+
 /**
  * 
  * @author kezhuang.li
  *
  * @param <T>
  */
+@Data
 public class Rest<T> {
 
 	private int code;
 	private T data;
 	private String msg;
-
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
-		this.code = code;
-	}
-
-	public T getData() {
-		return data;
-	}
-
-	public void setData(T data) {
-		this.data = data;
-	}
-
-	public String getMsg() {
-		return msg;
-	}
-
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
 
 	private Rest(int code, T data, String msg) {
 		this.code = code;
